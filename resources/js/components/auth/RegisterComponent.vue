@@ -1,0 +1,67 @@
+<template>
+    <div class="w-screen h-screen flex justify-center items-center">
+        <div class="container w-96 px-6 py-8 shadow-lg rounded-xl bg-white">
+            <h2 class="text-4xl font-bold mb-4 text-center">Регистрация!</h2>
+            <p class="mb-8 text-center font-bold">Уже есть аккаунта?
+                <router-link to="login" class="text-blue-600 underline">Войти</router-link>
+            </p>
+
+            <div class="container flex-col">
+                <input type="text"
+                       class="input-focus-hide-placeholder block w-full rounded-xl px-4 py-2 mb-4 text-black font-bold placeholder:italic placeholder:text-white focus:shadow-md focus:outline-none focus:bg-pink-400 bg-lime-600 hover:shadow-md transition duration-300 ease-in-out"
+                       placeholder="ФИО"
+                       v-model="name"
+                >
+                <input type="email"
+                       class="input-focus-hide-placeholder block w-full rounded-xl px-4 py-2 mb-4 text-black font-bold placeholder:italic placeholder:text-white focus:shadow-md focus:outline-none focus:bg-pink-400 bg-lime-600 hover:shadow-md transition duration-300 ease-in-out"
+                       placeholder="Эл. почта"
+                       v-model="email"
+                >
+                <input type="password"
+                       class="input-focus-hide-placeholder block w-full rounded-xl px-4 py-2 mb-4 text-black font-bold placeholder:italic placeholder:text-white focus:shadow-md focus:outline-none focus:bg-pink-400 bg-lime-600 hover:shadow-md transition duration-300 ease-in-out"
+                       placeholder="Пароль"
+                       v-model="password"
+                >
+                <input type="password"
+                       class="input-focus-hide-placeholder block w-full rounded-xl px-4 py-2 mb-4 text-black font-bold placeholder:italic placeholder:text-white focus:shadow-md focus:outline-none focus:bg-pink-400 bg-lime-600 hover:shadow-md transition duration-300 ease-in-out"
+                       placeholder="Подтвердить пароль"
+                       v-model="password_confirmation"
+                >
+                <input type="submit"
+                       class="block py-2 px-4 w-full rounded-xl bg-cyan-600 text-white font-bold hover:bg-cyan-400 transition duration-300 ease-in-out hover:shadow-md"
+                       @click.prevent="register"
+                >
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
+
+let name = null;
+let email = null;
+let password = null;
+let password_confirmation = null;
+
+function register() {
+    axios.get('/sanctum/csrf-cookie').then(response => {
+        axios.post('/register', {
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation
+        })
+            .then(response => {
+                console.log(response);
+                router.push('/dashboard');
+            })
+    })
+}
+</script>
+
+<style scoped>
+
+</style>
