@@ -36,13 +36,13 @@ router.beforeEach((to, from, next) => {
             return next();
         } else {
             return next({
-                path: {name: 'login'},
+                path: '/auth/login',
             });
         }
     }
     if (to.name === 'login' || to.name === 'register' && localStorage.getItem('isAuthenticated')) {
         return next({
-            path: {name: 'dashboard'},
+            path: '/dashboard',
         });
     }
     next();
