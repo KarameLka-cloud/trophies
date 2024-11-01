@@ -27,10 +27,12 @@
                        placeholder="Подтвердить пароль"
                        v-model="password_confirmation"
                 >
-                <input type="submit"
-                       class="block py-2 px-4 w-full rounded-xl bg-cyan-600 text-white font-bold hover:bg-cyan-400 transition duration-300 ease-in-out hover:shadow-md"
-                       @click.prevent="register"
+                <a href="#"
+                   class="block py-2 px-4 w-full rounded-xl bg-cyan-600 text-white text-center font-bold hover:bg-cyan-400 transition duration-300 ease-in-out hover:shadow-md"
+                   @click.prevent="register"
                 >
+                    Регистрация
+                </a>
             </div>
         </div>
     </div>
@@ -55,8 +57,10 @@ function register() {
             password_confirmation: password_confirmation
         })
             .then(response => {
-                console.log(response);
-                router.push('/dashboard');
+                if (response.status === 204) {
+                    localStorage.setItem('isAuthenticated', 'true');
+                    router.push({name: 'dashboard'});
+                }
             })
     })
 }

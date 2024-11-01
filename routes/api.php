@@ -7,6 +7,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::group(['middleware' => 'auth:sanctum'], function() {
+Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/posts', 'App\Http\Controllers\PostController');
+    Route::get('/users', 'App\Http\Controllers\UserController@index');
 });

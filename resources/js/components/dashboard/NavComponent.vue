@@ -8,10 +8,6 @@
                 <div class="user-links mb-4">
                     <a @click="$router.push({name: 'mainUser'})"
                        class="block font-bold bg-green-600 mb-2 px-4 py-2 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md cursor-pointer">Главная</a>
-                    <a @click="$router.push({name: 'progressUser'})"
-                       class="block font-bold bg-green-600 mb-2 px-4 py-2 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md cursor-pointer">Прогресс</a>
-                    <a @click="$router.push({name: 'trophiesUser'})"
-                       class="block font-bold bg-green-600 mb-2 px-4 py-2 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md cursor-pointer">Трофеи</a>
                     <a @click="$router.push({name: 'newsUser'})"
                        class="block font-bold bg-green-600 px-4 py-2 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md cursor-pointer">Новости</a>
                 </div>
@@ -35,18 +31,33 @@
         <div class="user bg-red-600 p-2 rounded-xl shadow-md">
             <div class="flex items-center justify-between mb-2">
                 <img src="@/assets/medal.svg" alt="" class="inline-block w-8 bg-white rounded-3xl">
-                <span class="inline-block text-white font-bold italic">Валентин Б.</span>
+                <span class="inline-block text-white font-bold italic">User</span>
             </div>
             <a href="#"
-               class="block bg-green-600 text-white text-center font-bold px-4 py-1 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md">Выйти</a>
+               class="block bg-green-600 text-white text-center font-bold px-4 py-1 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md"
+               @click.prevent="logout"
+            >
+                Выйти
+            </a>
         </div>
     </nav>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref} from 'vue';
+import {useRouter} from 'vue-router';
 
-let isAdmin = ref(true)
+const router = useRouter();
+
+let isAdmin = ref(true);
+
+function logout() {
+    axios.post('/logout').then(response => {
+        console.log(response);
+        localStorage.removeItem('isAuthenticated');
+        router.push({name: 'login'});
+    })
+}
 </script>
 
 <style lang="scss" scoped>
