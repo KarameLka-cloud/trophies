@@ -57,7 +57,7 @@ function register() {
             password_confirmation: password_confirmation
         })
             .then(response => {
-                if (response.status === 204) {
+                if (response.status === 201) {
                     localStorage.setItem('isAuthenticated', 'true');
                     router.push({name: 'dashboard'});
                 }
