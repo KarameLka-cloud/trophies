@@ -31,7 +31,7 @@
         <div class="user bg-red-600 p-2 rounded-xl shadow-md">
             <div class="flex items-center justify-between mb-2">
                 <img src="@/assets/medal.svg" alt="" class="inline-block w-8 bg-white rounded-3xl">
-                <span class="inline-block text-white font-bold italic">User</span>
+                <span class="inline-block text-white font-bold italic">{{ name }}</span>
             </div>
             <a href="#"
                class="block bg-green-600 text-white text-center font-bold px-4 py-1 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md"
@@ -44,20 +44,32 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import {useRouter} from 'vue-router';
 
 const router = useRouter();
 
 let isAdmin = ref(true);
+let name = ref(null);
 
 function logout() {
     axios.post('/logout').then(response => {
-        console.log(response);
         localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('userEmail')
         router.push({name: 'login'});
     })
 }
+
+function userName() {
+    axios.get(`/api/users/${localStorage.getItem('userEmail')}`).then(response => {
+        // console.log(response);
+        name.value = response.data[0].name;
+    })
+}
+
+onMounted(() => {
+    userName();
+})
 </script>
 
 <style lang="scss" scoped>

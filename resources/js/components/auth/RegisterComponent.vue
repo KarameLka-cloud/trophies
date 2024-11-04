@@ -59,6 +59,7 @@ function register() {
             .then(response => {
                 if (response.status === 201) {
                     localStorage.setItem('isAuthenticated', 'true');
+                    localStorage.setItem('userEmail', JSON.parse(response.config.data).email);
                     router.push({name: 'dashboard'});
                 }
             })
