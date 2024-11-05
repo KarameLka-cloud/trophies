@@ -13,6 +13,7 @@
             </div>
         </div>
         <a href="#" @click="getName">Name</a>
+        <a href="#" @click.prevent="getEvents">Events</a>
     </div>
 </template>
 
@@ -37,6 +38,12 @@ function getUsers() {
 function getName() {
     let email = 'user@mail.ru';
     axios.get(`/api/users/${email}`).then(response => {
+        console.log(response.data);
+    })
+}
+
+function getEvents() {
+    axios.get(`/api/events`).then(response => {
         console.log(response.data);
     })
 }
