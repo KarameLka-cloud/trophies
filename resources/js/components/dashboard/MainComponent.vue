@@ -23,16 +23,16 @@ import {onMounted, ref} from "vue";
 let users = ref(null);
 
 function getData() {
-    axios.get('/api/posts').then(response => {
-        console.log(response);
-    })
+    // axios.get('/api/posts').then(response => {
+    //     console.log(response);
+    // })
 }
 
 function getUsers() {
-    axios.get('/api/users')
-        .then(response => {
-            users.value = response.data;
-        })
+    // axios.get('/api/users')
+    //     .then(response => {
+    //         users.value = response.data;
+    //     })
 }
 
 function getName() {

@@ -61,10 +61,9 @@ function logout() {
 }
 
 function userName() {
-    axios.get(`/api/users/${localStorage.getItem('userEmail')}`).then(response => {
-        // console.log(response);
-        name.value = response.data[0].name;
-    })
+    // axios.get(`/api/users/${localStorage.getItem('userEmail')}`).then(response => {
+    //     name.value = response.data[0].name;
+    // })
 }
 
 onMounted(() => {
