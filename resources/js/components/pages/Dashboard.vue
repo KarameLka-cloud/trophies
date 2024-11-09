@@ -8,8 +8,8 @@
 </template>
 
 <script setup>
-import NavComponent from "./dashboard/NavComponent.vue";
-import MainComponent from "./dashboard/MainComponent.vue";
+import NavComponent from "./dashboard/Nav.vue";
+import MainComponent from "./dashboard/Main.vue";
 </script>
 
 <style lang="scss" scoped>

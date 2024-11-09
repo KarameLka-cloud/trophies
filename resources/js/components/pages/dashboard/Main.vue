@@ -1,12 +1,9 @@
 <template>
     <div>
         <div>
-            dashboard
-        </div>
-
-        <div>
             {{ userStore.user }}
         </div>
+        <router-view></router-view>
     </div>
 </template>
 

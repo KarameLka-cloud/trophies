@@ -32,12 +32,12 @@
                        placeholder="Подтвердить пароль"
                        v-model="password_confirmation"
                 >
-                <a href="#"
-                   class="block py-2 px-4 w-full rounded-xl bg-cyan-600 text-white text-center font-bold hover:bg-cyan-400 transition duration-300 ease-in-out hover:shadow-md"
-                   @click.prevent="register"
+                <input
+                    type="submit"
+                    class="block py-2 px-4 w-full rounded-xl bg-cyan-600 text-white text-center font-bold hover:bg-cyan-400 transition duration-300 ease-in-out hover:shadow-md cursor-pointer"
+                    @click.prevent="register"
+                    value="Регистрация"
                 >
-                    Регистрация
-                </a>
             </div>
         </div>
     </div>

@@ -25,12 +25,12 @@
                        v-model="password"
                        @keyup.enter.prevent="login"
                 >
-                <a href="#"
-                   class="block py-2 px-4 w-full rounded-xl bg-cyan-600 text-white font-bold text-center hover:bg-cyan-400 transition duration-300 ease-in-out hover:shadow-md"
-                   @click.prevent="login"
+                <input
+                    type="submit"
+                    class="block py-2 px-4 w-full rounded-xl bg-cyan-600 text-white font-bold text-center hover:bg-cyan-400 transition duration-300 ease-in-out hover:shadow-md cursor-pointer"
+                    @click.prevent="login"
+                    value="Войти"
                 >
-                    Войти
-                </a>
             </div>
         </div>
     </div>
@@ -39,9 +39,6 @@
 <script setup>
 import {useRouter} from 'vue-router';
 import axios from 'axios';
-import {useUserStore} from "@/stores/user.js";
-
-const userStore = useUserStore();
 
 const router = useRouter();
 
