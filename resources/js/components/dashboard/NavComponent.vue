@@ -1,5 +1,5 @@
 <template>
-    <nav class="nav w-80 p-4 flex flex-col justify-between border-2 border-dashed border-red-500 mr-4 rounded-xl">
+    <nav class="nav w-80 p-4 flex flex-col justify-between border-2 border-dashed border-red-500 mr-4 rounded-xl overflow-auto">
         <div>
             <img src="@/assets/medal.svg" alt="" class="block w-14 mx-auto pb-4 cursor-pointer"
                  @click="$router.push({name: 'userMain'})">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="user bg-red-600 p-2 rounded-xl shadow-md">
+        <div class="user bg-red-600 p-2 mt-4 rounded-xl shadow-md">
             <div class="flex items-center justify-between mb-2">
                 <img src="@/assets/medal.svg" alt="" class="inline-block w-8 bg-white rounded-3xl">
                 <span class="inline-block text-white font-bold italic">{{ name }}</span>

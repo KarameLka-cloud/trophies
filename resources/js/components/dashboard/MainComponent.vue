@@ -9,7 +9,7 @@
         </div>
         <div>
             <div v-for="user in users">
-                {{ user.name }}
+                {{ user.first_name }} {{ user.last_name }}
             </div>
         </div>
         <a href="#" @click="getName">Name</a>
@@ -23,16 +23,16 @@ import {onMounted, ref} from "vue";
 let users = ref(null);
 
 function getData() {
-    // axios.get('/api/posts').then(response => {
-    //     console.log(response);
-    // })
+    axios.get('/api/posts').then(response => {
+        console.log(response);
+    })
 }
 
 function getUsers() {
-    // axios.get('/api/users')
-    //     .then(response => {
-    //         users.value = response.data;
-    //     })
+    axios.get('/api/users')
+        .then(response => {
+            users.value = response.data;
+        })
 }
 
 function getName() {

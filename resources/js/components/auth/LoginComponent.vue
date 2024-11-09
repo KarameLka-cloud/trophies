@@ -52,7 +52,7 @@ function login() {
             password: password
         })
             .then(response => {
-                // if (response.status === 204) {
+                if (response.status === 204) {
                     localStorage.setItem('isAuthenticated', 'true');
                     localStorage.setItem('userEmail', JSON.parse(response.config.data).email);
                     // let email = JSON.parse(response.config.data).email;
@@ -61,7 +61,7 @@ function login() {
                     //         localStorage.setItem('userId', response.data[0].id);
                     //     });
                     router.push({name: 'dashboard'});
-                // }
+                }
             })
     });
 }

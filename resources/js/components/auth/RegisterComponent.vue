@@ -9,8 +9,13 @@
             <div class="container flex-col">
                 <input type="text"
                        class="input-focus-hide-placeholder block w-full rounded-xl px-4 py-2 mb-4 text-black font-bold placeholder:italic placeholder:text-white focus:shadow-md focus:outline-none focus:bg-pink-400 bg-lime-600 hover:shadow-md transition duration-300 ease-in-out"
-                       placeholder="ФИО"
-                       v-model="name"
+                       placeholder="Фамилия"
+                       v-model="last_name"
+                >
+                <input type="text"
+                       class="input-focus-hide-placeholder block w-full rounded-xl px-4 py-2 mb-4 text-black font-bold placeholder:italic placeholder:text-white focus:shadow-md focus:outline-none focus:bg-pink-400 bg-lime-600 hover:shadow-md transition duration-300 ease-in-out"
+                       placeholder="Имя"
+                       v-model="first_name"
                 >
                 <input type="email"
                        class="input-focus-hide-placeholder block w-full rounded-xl px-4 py-2 mb-4 text-black font-bold placeholder:italic placeholder:text-white focus:shadow-md focus:outline-none focus:bg-pink-400 bg-lime-600 hover:shadow-md transition duration-300 ease-in-out"
@@ -43,7 +48,8 @@ import {useRouter} from 'vue-router';
 
 const router = useRouter();
 
-let name = null;
+let last_name = null;
+let first_name = null;
 let email = null;
 let password = null;
 let password_confirmation = null;
@@ -51,7 +57,8 @@ let password_confirmation = null;
 function register() {
     axios.get('/sanctum/csrf-cookie').then(response => {
         axios.post('/register', {
-            name: name,
+            last_name: last_name,
+            first_name: first_name,
             email: email,
             password: password,
             password_confirmation: password_confirmation
