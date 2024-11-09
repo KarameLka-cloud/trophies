@@ -1,5 +1,6 @@
 <template>
-    <nav class="nav w-80 p-4 flex flex-col justify-between border-2 border-dashed border-red-500 mr-4 rounded-xl overflow-auto">
+    <nav
+        class="nav w-80 p-4 flex flex-col justify-between border-2 border-dashed border-red-500 mr-4 rounded-xl overflow-auto">
         <div>
             <img src="@/assets/medal.svg" alt="" class="block w-14 mx-auto pb-4 cursor-pointer"
                  @click="$router.push({name: 'userMain'})">
@@ -12,7 +13,7 @@
                        class="block font-bold bg-green-600 px-4 py-2 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md cursor-pointer">Новости</a>
                 </div>
 
-                <div class="admin-menu bg-zinc-800 p-2 rounded-xl" v-show="isAdmin">
+                <div class="admin-menu bg-zinc-800 p-2 rounded-xl" v-show="userStore.user[0].role === 'admin'">
                     <span class="block font-bold mb-2 text-center">Админка</span>
                     <div class="admin-links">
                         <a @click="$router.push({name: 'adminMain'})"
@@ -31,7 +32,11 @@
         <div class="user bg-red-600 p-2 mt-4 rounded-xl shadow-md">
             <div class="flex items-center justify-between mb-2">
                 <img src="@/assets/medal.svg" alt="" class="inline-block w-8 bg-white rounded-3xl">
-                <span class="inline-block text-white font-bold italic">{{ name }}</span>
+                <span
+                    class="block text-white font-bold italic">{{
+                        `${userStore.user[0].first_name} ${userStore.user[0].last_name[0]}.`
+                    }}
+                </span>
             </div>
             <a href="#"
                class="block bg-green-600 text-white text-center font-bold px-4 py-1 rounded-xl hover:bg-green-500 transition duration-300 ease-in-out hover:shadow-md"
@@ -44,13 +49,11 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
 import {useRouter} from 'vue-router';
+import {useUserStore} from '@/stores/user.js';
 
 const router = useRouter();
-
-let isAdmin = ref(true);
-let name = ref(null);
+const userStore = useUserStore();
 
 function logout() {
     axios.post('/logout').then(response => {
@@ -59,16 +62,6 @@ function logout() {
         router.push({name: 'login'});
     })
 }
-
-function userName() {
-    // axios.get(`/api/users/${localStorage.getItem('userEmail')}`).then(response => {
-    //     name.value = response.data[0].name;
-    // })
-}
-
-onMounted(() => {
-    userName();
-})
 </script>
 
 <style lang="scss" scoped>

@@ -5,12 +5,12 @@
                 <img src="../../assets/medal.svg" alt="Логотип медаль" class="h-16">
             </div>
             <h2 class="text-4xl font-bold mb-4 text-center">Добро пожаловать!</h2>
-            <p class="mb-2 text-center font-bold">Ещё нет аккаунта?
+            <p class="mb-4 text-center font-bold">Ещё нет аккаунта?
                 <router-link to="register" class="text-blue-600 underline">Зарегистрируйтесь</router-link>
             </p>
-            <p class="mb-8 text-center font-bold">
-                <router-link to="#" class="text-blue-600 underline">Забыли пароль?</router-link>
-            </p>
+            <!--            <p class="mb-8 text-center font-bold">-->
+            <!--                <router-link to="#" class="text-blue-600 underline">Забыли пароль?</router-link>-->
+            <!--            </p>-->
 
             <div class="container flex-col">
                 <input type="email"
@@ -38,7 +38,10 @@
 
 <script setup>
 import {useRouter} from 'vue-router';
-import axios from "axios";
+import axios from 'axios';
+import {useUserStore} from "@/stores/user.js";
+
+const userStore = useUserStore();
 
 const router = useRouter();
 
@@ -55,11 +58,6 @@ function login() {
                 if (response.status === 204) {
                     localStorage.setItem('isAuthenticated', 'true');
                     localStorage.setItem('userEmail', JSON.parse(response.config.data).email);
-                    // let email = JSON.parse(response.config.data).email;
-                    // axios.get(`/api/users/${email}`)
-                    //     .then(response => {
-                    //         localStorage.setItem('userId', response.data[0].id);
-                    //     });
                     router.push({name: 'dashboard'});
                 }
             })

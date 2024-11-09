@@ -15,6 +15,6 @@ class UserController extends Controller
 
     public function show($email)
     {
-        return DB::table('users')->select('id', 'name')->where('email', $email)->get();
+        return DB::table('users')->select('last_name', 'first_name', 'email', 'role')->where('email', $email)->get();
     }
 }
